@@ -26,14 +26,4 @@ class UserUpdateForm(forms.ModelForm):
             'last_name',
             'email',
             'phone_number',
-            'password',
-        ]
-
-
-class UserLoginForm(forms.ModelForm):
-    class Meta:
-        model = UserProfile
-        fields = [
-            'username',
-            'password',
         ]

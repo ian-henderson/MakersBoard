@@ -46,14 +46,14 @@
             </form>
             <ul class="nav navbar-nav navbar-right">
 								{% if user.is_authenticated %}
-										<li><a href="{{ user.get_absolute_url }}">{{ user.username }}</a></li>
+										<li><a href="/users/{{ user.username }}">{{ user.username }}</a></li>
 										<li><a href="/users/logout">Logout</a></li>
 								{% else %}
 										<li><a href="/users/create">Create Account</a></li>
 										<li><a href="/users/login">Login</a></li>
 								{% endif %}
-             </ul>
-        </div>
-        <!-- /.navbar-collapse -->
+						</ul>
+				</div>
+				<!-- /.navbar-collapse -->
 		</div>
 </nav>
