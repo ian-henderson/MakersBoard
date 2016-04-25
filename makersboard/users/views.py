@@ -30,7 +30,7 @@ def user_login(request):
 
 def user_logout(request):
     logout(request)
-    messages.success(request, 'Successfully logged out.')
+    messages.success(request, 'Logged out.')
     return HttpResponseRedirect('/posts')
 
 
