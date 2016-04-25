@@ -5,15 +5,19 @@ from .models import UserProfile
 
 class UserForm(forms.ModelForm):
     class Meta:
+        password = forms.CharField(widget=forms.PasswordInput)
         model = UserProfile
+        widgets = {
+            'password': forms.PasswordInput(),
+        }
         fields = [
             'profile_picture',
             'first_name',
             'last_name',
-            'phone_number',
             'username',
-            'email',
             'password',
+            'email',
+            'phone_number',
         ]
 
 
