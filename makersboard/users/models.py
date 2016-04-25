@@ -19,9 +19,8 @@ class UserProfile(User):
         upload_to=upload_location,
         null=True,
         blank=True,
-        width_field='height_field',
-        height_field='width_field'
-    )
+        width_field=None,   # 'height_field',
+        height_field=None)  # 'width_field'
     height_field = models.IntegerField(default=0)
     width_field = models.IntegerField(default=0)
     gallery = Post.objects.all()  # filter(user="ian")

@@ -11,7 +11,7 @@ from .models import UserProfile
 
 def user_login(request):
     if request.method == 'POST':
-        auth_form = AuthenticationForm(data=request.POST)
+        auth_form = AuthenticationForm(request.POST)
         if auth_form.is_valid:
             user = authenticate(
                 username=request.POST['username'],
@@ -24,7 +24,6 @@ def user_login(request):
         auth_form = AuthenticationForm()
     context = {
         'auth_form': auth_form,
-        'title': 'User Login',
     }
     return render(request, 'user_login.html', context)
 
@@ -36,57 +35,58 @@ def user_logout(request):
 
 
 def user_create(request):  # CRUD: Create
-    form = UserForm(request.POST or None, request.FILES or None)
-    if form.is_valid():
-        # Get necessary data from form
-        username = form.cleaned_data['username']
-        email = form.cleaned_data['email']
-        password = form.cleaned_data['password']
-        # Create User
-        user = UserProfile.objects.create_user(username, email, password)
-        # Get rest of data for user
-        user.first_name = form.cleaned_data['first_name']
-        user.last_name = form.cleaned_data['last_name']
-        user.profile_picture = form.cleaned_data['profile_picture']
-        user.phone_number = form.cleaned_data['phone_number']
-        # Save info
-        user.save()
-        messages.success(request, 'Successfully created user.')
-        # Log new user in
-        # logout(request)
-        user_auth = authenticate(
-            username=username,
-            password=password)
-        login(request, user_auth)
-        messages.success(request, 'Successfully logged in.')
-        return HttpResponseRedirect(user.get_absolute_url())
+    if request.method == 'POST':
+        form = UserForm(request.POST, request.FILES)
+        if form.is_valid:
+            # Create user
+            user = UserProfile.objects.create_user(
+                username=request.POST['username'],
+                email=request.POST['email'],
+                password=request.POST['password'])
+            user.first_name = request.POST['first_name']
+            user.last_name = request.POST['last_name']
+            user.profile_picture = request.FILES['profile_picture']
+            user.phone_number = request.POST['phone_number']
+            # Save user
+            user.save()
+            user_auth = authenticate(
+                username=request.POST['username'],
+                password=request.POST['password'])
+            # Login
+            login(request, user_auth)
+            messages.success(request, 'Logged in as %s.' % (user.username))
+            return HttpResponseRedirect(user.get_absolute_url())
+    else:
+        form = UserForm()
     context = {
         'form': form,
     }
     return render(request, 'user_form.html', context)
 
 
-def user_update(request, slug=None):
-    user = get_object_or_404(UserProfile, slug=slug)
-    form = UserUpdateForm(request.POST or None, request.FILES or None,
-                          instance=user)
-    if form.is_valid():
-        # Get new user info
-        user.profile_picture = form.cleaned_data['profile_picture']
-        user.first_name = form.cleaned_data['first_name']
-        user.last_name = form.cleaned_data['last_name']
-        user.email = form.cleaned_data['email']
-        user.phone_number = form.cleaned_data['phone_number']
-        user.save()
-        messages.success(request, 'Successfully updated user.')
-        return HttpResponseRedirect(user.get_absolute_url())
+def user_update(request, slug=None):  # CRUD: Update
+    if request.method == 'POST':
+        user = get_object_or_404(UserProfile, slug=slug)
+        form = UserUpdateForm(request.POST or None, request.FILES or None,
+                              instance=user)
+        if form.is_valid:
+            user.profile_picture = request.FILES['profile_picture']
+            user.first_name = request.POST['first_name']
+            user.last_name = request.POST['last_name']
+            user.email = request.POST['email']
+            user.phone_number = request.POST['phone_number']
+            user.save()
+            messages.success(request, 'User %s updated.' % (user.username))
+            return HttpResponseRedirect(user.get_absolute_url())
+    else:
+        form = UserUpdateForm()
     context = {
         'form': form,
     }
     return render(request, 'user_update_form.html', context)
 
 
-def user_list(request):
+def user_list(request):  # CRUD: Retrieve
     queryset_list = UserProfile.objects.all()
     paginator = Paginator(queryset_list, 10)  # Show 10 users per page
     page = request.GET.get('page')
@@ -115,6 +115,7 @@ def user_detail(request, slug=None):  # CRUD: Retrieve
 
 def user_delete(request, slug=None):  # CRUD: Delete
     instance = get_object_or_404(UserProfile, slug=slug)
+    username = instance.username
     instance.delete()
-    messages.success(request, 'Successfully deleted user.')
+    messages.success(request, 'Successfully deleted user %s.' % (username))
     return redirect('users:list')
