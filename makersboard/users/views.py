@@ -1,27 +1,30 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import AuthenticationForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 
-from .forms import UserForm, UserUpdateForm, UserLoginForm
+from .forms import UserForm, UserUpdateForm
 from .models import UserProfile
 
 
 def user_login(request):
-    form = UserLoginForm(request.POST or None)
-    if form.is_valid():
-        user = authenticate(
-            username=form.cleaned_data['username'],
-            password=form.cleaned_data['password'])
-        if user is not None:
-            login(request, user)
-            messages.success(request, 'Login successful.')
-            return HttpResponseRedirect(user.get_absolute_url())
-        else:
-            messages.error(request, 'Invalid login credentials.')
+    if request.method == 'POST':
+        auth_form = AuthenticationForm(data=request.POST)
+        if auth_form.is_valid:
+            user = authenticate(
+                username=request.POST['username'],
+                password=request.POST['password'])
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return HttpResponseRedirect('/posts')
+    else:
+        auth_form = AuthenticationForm()
     context = {
-        'form': form,
+        'auth_form': auth_form,
+        'title': 'User Login',
     }
     return render(request, 'user_login.html', context)
 
@@ -51,7 +54,9 @@ def user_create(request):  # CRUD: Create
         messages.success(request, 'Successfully created user.')
         # Log new user in
         # logout(request)
-        user_auth = authenticate(username=username, password=password)
+        user_auth = authenticate(
+            username=username,
+            password=password)
         login(request, user_auth)
         messages.success(request, 'Successfully logged in.')
         return HttpResponseRedirect(user.get_absolute_url())
@@ -72,7 +77,6 @@ def user_update(request, slug=None):
         user.last_name = form.cleaned_data['last_name']
         user.email = form.cleaned_data['email']
         user.phone_number = form.cleaned_data['phone_number']
-        user.set_password(form.cleaned_data['password'])
         user.save()
         messages.success(request, 'Successfully updated user.')
         return HttpResponseRedirect(user.get_absolute_url())

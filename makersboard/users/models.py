@@ -13,16 +13,6 @@ def upload_location(instance, filename):
 
 
 class UserProfile(User):
-    '''
-    username = models.CharField(max_length=30)
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    email = models.EmailField(max_length=254)
-    password = models.CharField(max_length=30)
-    is_active = models.BooleanField()
-    last_login = models.DateTimeField(auto_now=False, auto_now_add=False)
-    date_joined = models.DateTimeField(auto_now=False, auto_now_add=True)
-    '''
     phone_number = PhoneNumberField()
     slug = models.SlugField(unique=True)
     profile_picture = models.ImageField(

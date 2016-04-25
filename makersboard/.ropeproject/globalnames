@@ -2,12 +2,12 @@
 aUmanage]U
 posts.apps]qUPostsConfigqaU(posts.migrations.0002_auto_20160413_2124]qh
 aUusers.views]q(Uuser_updateqUuser_detailqUuser_logoutqU
-user_loginqUuser_createqUuser_deleteqU	user_listqeUposts.forms]qUPostFormqaUmakersboard]Uposts.admin]qU	PostAdminqaUposts.tests]Uusers.forms]q(UUserLoginFormqUUserUpdateFormqUUserFormqeUusers.admin]qUUserProfileAdminqaU(posts.migrations.0005_auto_20160415_2104]q h
-aUusers.migrations.0001_initial]q!U	Migrationq"aUusers.models]q#(hhUUserProfileq$heUmakersboard.wsgi]q%Uapplicationq&aU
-users.urls]q'Uurlpatternsq(aU
-posts.urls]q)h(aUusers]Umakersboard.urls]q*h(aU(posts.migrations.0004_auto_20160415_2033]q+h
-aUposts.templatetags]Uposts.migrations.0001_initial]q,h"aU
-users.apps]q-UUsersConfigq.aUmakersboard.settings]q/(U	DATABASESq0UMIDDLEWARE_CLASSESq1UROOT_URLCONFq2ULANGUAGE_CODEq3UUSE_I18Nq4U
-SECRET_KEYq5UBASE_DIRq6U	TEMPLATESq7USTATIC_ROOTq8U	TIME_ZONEq9UWSGI_APPLICATIONq:UALLOWED_HOSTSq;UAUTH_PASSWORD_VALIDATORSq<U
-STATIC_URLq=UUSE_L10Nq>UDEBUGq?UUSE_TZq@UINSTALLED_APPSqAUPASSWORD_HASHERSqBU
-MEDIA_ROOTqCUSTATICFILES_DIRSqDU	MEDIA_URLqEeUposts.templatetags.urlify]qF(UregisterqGUurlifyqHeUposts.migrations]Uposts]Uposts.views]qI(Upost_detailqJU	post_listqKUpost_updateqLUpost_createqMUpost_deleteqNeUusers.migrations]u.
+user_loginqUuser_createqUuser_deleteqU	user_listqeUposts.forms]qUPostFormqaUmakersboard]Uposts.admin]qU	PostAdminqaUposts.tests]Uusers.forms]q(UUserUpdateFormqUUserFormqeUusers.admin]qUUserProfileAdminqaU(posts.migrations.0005_auto_20160415_2104]qh
+aUusers.migrations.0001_initial]q U	Migrationq!aUusers.models]q"(hhUUserProfileq#heUmakersboard.wsgi]q$Uapplicationq%aU
+users.urls]q&Uurlpatternsq'aU
+posts.urls]q(h'aUusers]Umakersboard.urls]q)h'aU(posts.migrations.0004_auto_20160415_2033]q*h
+aUposts.templatetags]Uposts.migrations.0001_initial]q+h!aU
+users.apps]q,UUsersConfigq-aUmakersboard.settings]q.(U	DATABASESq/UMIDDLEWARE_CLASSESq0UROOT_URLCONFq1ULANGUAGE_CODEq2UUSE_I18Nq3U
+SECRET_KEYq4UBASE_DIRq5U	TEMPLATESq6USTATIC_ROOTq7U	TIME_ZONEq8UWSGI_APPLICATIONq9UALLOWED_HOSTSq:UAUTH_PASSWORD_VALIDATORSq;U
+STATIC_URLq<UUSE_L10Nq=UDEBUGq>UUSE_TZq?UINSTALLED_APPSq@UPASSWORD_HASHERSqAU
+MEDIA_ROOTqBUSTATICFILES_DIRSqCU	MEDIA_URLqDeUposts.templatetags.urlify]qE(UregisterqFUurlifyqGeUposts.migrations]Uposts]Uposts.views]qH(Upost_detailqIU	post_listqJUpost_updateqKUpost_createqLUpost_deleteqMeUusers.migrations]u.
