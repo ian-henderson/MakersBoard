@@ -26,12 +26,16 @@
 								{% if user.is_authenticated %}
 								<div class="btn-group" role="group" aria-label="...">
 										<a href='/users/{{ user.username }}' class='btn navbar-btn' role='button'>{{ user.first_name }}</a>
-										<a href='/users/logout' class='btn navbar-btn' role='button'>Log out</a>
+										<a href='/users/logout' class='btn navbar-btn' role='button'>Log Out</a>
 								</div>
 								<div class="btn-group" role="group" aria-label="...">
 										<a href='/posts/create' class='btn navbar-btn' role='button'>Create Post</a>
 								</div>
 								{% else %}
+								<div class="btn-group" role="group" aria-label="...">
+										<a href='/users/create' class='btn navbar-btn' role='button'>Create Account</a>
+										<a href='/users/login' class='btn navbar-btn' role='button'>Log In</a>
+								</div>
 								{% endif %}
 								<li><a href="#">Link</a></li>
 								<li class="dropdown">

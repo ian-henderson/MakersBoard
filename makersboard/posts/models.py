@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import pre_save
@@ -6,11 +5,10 @@ from django.utils.text import slugify
 
 
 def upload_location(instance, filename):
-    return '%s/posts/%s' % (instance.user, filename)
+    return '%s/posts/%s' % (instance.owner, filename)
 
 
 class Post(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
     owner = models.CharField(max_length=30)
     title = models.CharField(max_length=120)
     slug = models.SlugField(unique=True)
@@ -27,7 +25,6 @@ class Post(models.Model):
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
     for_sale = models.BooleanField(default=False)
     medium = models.CharField(max_length=120, default=None)
-    rating = models.DecimalField(max_digits=3, decimal_places=2, default=None)
     price = models.DecimalField(max_digits=10, decimal_places=2, default=None)
 
     def __str__(self):

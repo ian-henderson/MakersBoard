@@ -7,6 +7,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from .forms import UserForm, UserUpdateForm
 from .models import UserProfile
+from posts.models import Post
 
 
 def user_login(request):
@@ -114,7 +115,9 @@ def user_list(request):  # CRUD: Retrieve
 
 def user_detail(request, slug=None):  # CRUD: Retrieve
     instance = get_object_or_404(UserProfile, slug=slug)
+    gallery = Post.objects.filter(owner=instance.username)
     context = {
+        'gallery': gallery,
         'instance': instance,
     }
     return render(request, 'user_detail.html', context)
