@@ -5,8 +5,6 @@ from django.db.models.signals import pre_save
 from django.utils.text import slugify
 from phonenumber_field.modelfields import PhoneNumberField
 
-from posts.models import Post
-
 
 def upload_location(instance, filename):
     return '%s/%s' % (instance.username, filename)
@@ -23,7 +21,6 @@ class UserProfile(User):
         height_field=None)  # 'width_field'
     height_field = models.IntegerField(default=0)
     width_field = models.IntegerField(default=0)
-    gallery = Post.objects.all()  # filter(user="ian")
 
     def __str__(self):
         return self.username

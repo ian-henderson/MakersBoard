@@ -12,12 +12,15 @@ from .models import UserProfile
 def user_login(request):
     if request.method == 'POST':
         auth_form = AuthenticationForm(request.POST)
+        m = UserProfile.objects.get(username=request.POST['username'])
         if auth_form.is_valid:
             user = authenticate(
                 username=request.POST['username'],
                 password=request.POST['password'])
             if user is not None:
                 if user.is_active:
+                    # Session is created
+                    request.session['member_id'] = m.id
                     login(request, user)
                     return HttpResponseRedirect('/posts')
     else:
@@ -29,8 +32,12 @@ def user_login(request):
 
 
 def user_logout(request):
-    logout(request)
-    messages.success(request, 'Logged out.')
+    try:
+        logout(request)
+        del request.session['member_id']
+        messages.success(request, 'Logged out.')
+    except KeyError:
+        pass
     return HttpResponseRedirect('/posts')
 
 

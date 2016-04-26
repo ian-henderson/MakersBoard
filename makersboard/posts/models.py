@@ -11,6 +11,7 @@ def upload_location(instance, filename):
 
 class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, default=1)
+    owner = models.CharField(max_length=30)
     title = models.CharField(max_length=120)
     slug = models.SlugField(unique=True)
     image = models.ImageField(

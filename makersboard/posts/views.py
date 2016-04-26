@@ -13,6 +13,7 @@ def post_create(request):  # CRUD: Create
     if form.is_valid():
         instance = form.save(commit=False)
         instance.user = request.user
+        instance.owner = request.user
         instance.save()
         messages.success(request, 'Successfully created post.')
         return HttpResponseRedirect(instance.get_absolute_url())
