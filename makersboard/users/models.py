@@ -26,7 +26,8 @@ class UserProfile(User):
         return self.username
 
     def get_absolute_url(self):
-        return reverse('users:detail', kwargs={'slug': self.slug})
+        return '/users/%s' % (self.username)
+        # return reverse('users:detail', kwargs={'slug': self.slug})
 
     def get_full_name(self):
         return '%s %s' % (self.first_name, self.last_name)
