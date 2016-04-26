@@ -11,6 +11,5 @@ class PostForm(forms.ModelForm):
             'image',
             'description',
             'medium',
-            'rating',
             'price',
         ]
