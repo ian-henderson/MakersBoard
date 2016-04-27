@@ -72,3 +72,11 @@ def post_delete(request, slug=None):  # CRUD: Delete
     instance.delete()
     messages.success(request, 'Successfully deleted post.')
     return redirect('posts:list')
+
+
+def search(request):
+    query = request.GET['q']
+    context = {
+        'query': query,
+    }
+    return render(request, 'search_results.html', context)

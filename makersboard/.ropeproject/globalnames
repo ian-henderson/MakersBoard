@@ -10,4 +10,4 @@ aUposts.templatetags]Uposts.migrations.0001_initial]q+h!aU
 users.apps]q,UUsersConfigq-aUmakersboard.settings]q.(U	DATABASESq/UMIDDLEWARE_CLASSESq0UROOT_URLCONFq1ULANGUAGE_CODEq2UUSE_I18Nq3U
 SECRET_KEYq4UBASE_DIRq5U	TEMPLATESq6USTATIC_ROOTq7U	TIME_ZONEq8USESSION_ENGINEq9UWSGI_APPLICATIONq:UALLOWED_HOSTSq;UAUTH_PASSWORD_VALIDATORSq<U
 STATIC_URLq=UUSE_L10Nq>UDEBUGq?UUSE_TZq@UINSTALLED_APPSqAUPASSWORD_HASHERSqBU
-MEDIA_ROOTqCUSTATICFILES_DIRSqDUSESSION_COOKIE_HTTPONLYqEUCACHESqFU	MEDIA_URLqGeUposts.templatetags.urlify]qH(UregisterqIUurlifyqJeUposts.migrations]Uposts]Uposts.views]qK(Upost_detailqLU	post_listqMUpost_updateqNUpost_createqOUpost_deleteqPeUusers.migrations]u.
+MEDIA_ROOTqCUSTATICFILES_DIRSqDUSESSION_COOKIE_HTTPONLYqEUCACHESqFU	MEDIA_URLqGeUposts.templatetags.urlify]qH(UregisterqIUurlifyqJeUposts.migrations]Uposts]Uposts.views]qK(UsearchqLUpost_detailqMU	post_listqNUpost_updateqOUpost_createqPUpost_deleteqQeUusers.migrations]u.
