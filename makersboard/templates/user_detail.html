@@ -8,16 +8,28 @@
 
 {% block content %}
 
-<div class='col-sm-6 col-sm-offset-3'>
-		<img src='{{ instance.profile_picture.url }}' class='img-responsive'/>
-		<h1>{{ instance.username }}<small> Joined {{ instance.date_joined|timesince }} ago</small></h1>
-		{{ instance.get_full_name }}</br>
-		{% for post in gallery %}
-				<div class='col-sm-6 col-sm-offset-3'>
-						<img src='{{ post.image.url }}' class='img-responsive'/>
-						<h2>{{ post.title }}</h2>
+<div class='col-sm-3 col-sm-offset-0'>
+		<div class="panel panel-default">
+				<div class="panel-body">
+						<img src='{{ instance.profile_picture.url }}' class='img-responsive'/>
+						<h1>{{ instance.username }}<small> Joined {{ instance.date_joined|timesince }} ago</small></h1>
+						{{ instance.get_full_name }}</br>
 				</div>
-		{% endfor %}
+		</div>
+</div>
+
+<div class='col-sm-6 col-sm-offset-0'>
+		<div class="panel panel-default">
+				<div class="panel-body">
+						{% for post in gallery %}
+								<div class='col-sm-6 col-sm-offset-3'>
+										<img src='{{ post.image.url }}' class='img-responsive'/>
+										<h2>{{ post.title }}</h2>
+										<p><a href="{{ post.get_absolute_url }}" class="btn btn-primary" role="button">View</a></p>
+								</div>
+						{% endfor %}
+				</div>
+		</div>
 </div>
 
 {% endblock content %}
