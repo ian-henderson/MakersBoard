@@ -55,13 +55,13 @@ def user_create(request):  # CRUD: Create
             user.last_name = request.POST['last_name']
             user.profile_picture = request.FILES['profile_picture']
             user.phone_number = request.POST['phone_number']
-            # Save user
             user.save()
-            user_auth = authenticate(
+            user = authenticate(
                 username=request.POST['username'],
-                password=request.POST['password'])
+                password=request.POST['password'],
+            )
             # Login
-            login(request, user_auth)
+            login(request, user)
             messages.success(request, 'Logged in as %s.' % (user.username))
             return HttpResponseRedirect(user.get_absolute_url())
     else:
@@ -115,7 +115,7 @@ def user_list(request):  # CRUD: Retrieve
 
 def user_detail(request, slug=None):  # CRUD: Retrieve
     instance = get_object_or_404(UserProfile, slug=slug)
-    gallery = Post.objects.filter(owner=instance.username)
+    gallery = Post.objects.filter(user=instance)
     context = {
         'gallery': gallery,
         'instance': instance,

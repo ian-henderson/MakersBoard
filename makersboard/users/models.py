@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
@@ -9,7 +9,8 @@ def upload_location(instance, filename):
     return '%s/%s' % (instance.username, filename)
 
 
-class UserProfile(User):
+class UserProfile(AbstractUser):
+    USERNAME_FIELD = 'username'
     phone_number = PhoneNumberField()
     slug = models.SlugField(unique=True)
     profile_picture = models.ImageField(
@@ -17,7 +18,8 @@ class UserProfile(User):
         null=True,
         blank=True,
         width_field=None,   # 'height_field',
-        height_field=None)  # 'width_field'
+        height_field=None,  # 'width_field'
+    )
     height_field = models.IntegerField(default=0)
     width_field = models.IntegerField(default=0)
 
