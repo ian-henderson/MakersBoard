@@ -95,7 +95,9 @@ def user_update(request, slug=None):  # CRUD: Update
 
 
 def user_list(request):  # CRUD: Retrieve
-    queryset_list = UserProfile.objects.all()
+    queryset_list = UserProfile.objects.filter(
+        profile_picture__isnull=True,
+    )
     paginator = Paginator(queryset_list, 10)  # Show 10 users per page
     page = request.GET.get('page')
     try:
