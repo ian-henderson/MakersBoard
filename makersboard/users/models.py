@@ -1,4 +1,5 @@
 from django.contrib.auth.models import AbstractUser
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
@@ -27,8 +28,8 @@ class UserProfile(AbstractUser):
         return self.username
 
     def get_absolute_url(self):
-        return '/users/%s' % (self.username)
-        # return reverse('users:detail', kwargs={'slug': self.slug})
+        # return '/users/%s' % (self.username)
+        return reverse('users:detail', kwargs={'slug': self.slug})
 
     def get_full_name(self):
         return '%s %s' % (self.first_name, self.last_name)
