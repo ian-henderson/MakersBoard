@@ -16,7 +16,7 @@
 								<div class="caption">
 										<h3><a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a><small> {{ obj.timestamp|timesince }} ago</small></h3>
 										{% if obj.user.get_full_name %}
-												<p>Author: {{ obj.user.get_full_name }}</p>
+										<p>Author: <a href="/users/{{ obj.user.username }}">{{obj.user.username}}</a></p>
 										{% endif %}
 										<p>{{ obj.medium }} | {{ obj.rating }} | {{ obj.price }}</p>
 										<p>{{ obj.description|linebreaks|truncatechars:120 }}</p>

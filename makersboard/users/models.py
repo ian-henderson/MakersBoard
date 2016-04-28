@@ -2,7 +2,7 @@ from django.contrib.auth.models import AbstractUser
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import pre_save
-from django.utils.text import slugify
+# from django.utils.text import slugify
 from phonenumber_field.modelfields import PhoneNumberField
 
 
@@ -29,7 +29,6 @@ class UserProfile(AbstractUser):
         return self.username
 
     def get_absolute_url(self):
-        # return '/users/%s' % (self.username)
         return reverse('users:detail', kwargs={'slug': self.slug})
 
     def get_full_name(self):
@@ -37,7 +36,7 @@ class UserProfile(AbstractUser):
 
 
 def create_slug(instance, new_slug=None):
-    slug = slugify(instance.username)
+    slug = instance.username
     if new_slug is not None:
         slug = new_slug
     qs = UserProfile.objects.filter(slug=slug).order_by('username')
