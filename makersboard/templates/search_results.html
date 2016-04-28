@@ -2,7 +2,59 @@
 
 
 {% block content %}
+
 <div class='col-sm-6 col-sm-offset-3'>
-		{{ query }}
+		<h1>{{ title }}</h1>
+		<h5>Displaying results for "{{ query }}."</h5>
+		{% for obj in object_list %}
+		<div class="row">
+				<div class="col-sm-3">
+						<a href="{{ obj.get_absolute_url }}">
+								<div class="thumbnail">
+										{% if obj.image %}
+												<img src='{{ obj.image.url }}' class='img-responsive'/>
+										{% endif %}
+								</div>
+						</a>
+				</div>
+						<!--<img src="..." alt="...">-->
+				<div class="col-sm-9">
+						<div>
+								<div style="font-size: 22px"><a href='{{ obj.get_absolute_url }}'>{{ obj.title }}</a><small> {{ obj.timestamp|timesince }} ago</small></div>
+								<div>
+										{% if obj.user.get_full_name %}
+												Created by {{ obj.user.get_full_name }}
+										{% endif %}
+								</div>
+								<p>
+										<table style="width:100%">
+												<tr style="font-size: 14px">
+														<td>{{ obj.medium }}</td>
+														<td>Price: ${{ obj.price }}</td>
+														<td>{{ obj.rating }}</td>
+												</tr>
+										</table>
+								</p>
+								<p>{{ obj.description|linebreaks|truncatechars:120 }}</p>
+						</div>
+				</div>
+				</hr>
+		</div>
+		{% endfor %}
+
+		<div class="pagination">
+				<span class="step-links">
+				    {% if object_list.has_previous %}
+								<a href="?page={{ object_list.previous_page_number  }}">previous</a>
+	 		      {% endif %}
+						<span class="current">
+								Page {{ object_list.number  }} of {{ object_list.paginator.num_pages  }}.
+						</span>
+						{% if object_list.has_next %}
+								<a href="?page={{ object_list.next_page_number  }}">next</a>
+						{% endif %}
+		    </span>
+		</div>
 </div>
+
 {% endblock content %}

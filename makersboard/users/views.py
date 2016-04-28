@@ -53,6 +53,8 @@ def user_create(request):  # CRUD: Create
                 password=request.POST['password'])
             user.first_name = request.POST['first_name']
             user.last_name = request.POST['last_name']
+            user.full_name = "%s %s" % (request.POST['first_name'],
+                                        request.POST['last_name'])
             user.profile_picture = request.FILES['profile_picture']
             user.phone_number = request.POST['phone_number']
             user.save()
