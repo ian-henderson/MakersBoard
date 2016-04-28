@@ -14,6 +14,8 @@ class UserForm(forms.ModelForm):
             'profile_picture',
             'first_name',
             'last_name',
+            'bio',
+            'location',
             'username',
             'password',
             'email',
@@ -28,6 +30,8 @@ class UserUpdateForm(forms.ModelForm):
             'profile_picture',
             'first_name',
             'last_name',
+            'bio',
+            'location',
             'email',
             'phone_number',
         ]

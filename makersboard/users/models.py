@@ -24,6 +24,8 @@ class UserProfile(AbstractUser):
     height_field = models.IntegerField(default=0)
     width_field = models.IntegerField(default=0)
     full_name = models.CharField(max_length=150)
+    location = models.CharField(max_length=150)
+    bio = models.TextField()
 
     def __str__(self):
         return self.username

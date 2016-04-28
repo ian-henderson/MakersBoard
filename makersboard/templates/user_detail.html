@@ -13,16 +13,18 @@
 				<div class="panel-body">
 						<img src='{{ instance.profile_picture.url }}' class='img-responsive'/>
 						<h1>{{ instance.username }}<small> Joined {{ instance.date_joined|timesince }} ago</small></h1>
-						{{ instance.get_full_name }}</br>
+						<p>{{ instance.get_full_name }}</p>
+						<p><b>Bio</b></br>{{ instance.bio }}</p>
+						<a href="/users/{{ instance.username }}/edit/" class="btn btn-primary" role="button">Edit Profile</a></br>
 				</div>
 		</div>
 </div>
 
-<div class='col-sm-6 col-sm-offset-0'>
+<div class='col-sm-9 col-sm-offset-0'>
 		<div class="panel panel-default">
 				<div class="panel-body">
 						{% for post in gallery %}
-								<div class='col-sm-6 col-sm-offset-3'>
+								<div class='col-sm-3 col-sm-offset-0'>
 										<img src='{{ post.image.url }}' class='img-responsive'/>
 										<h2>{{ post.title }}</h2>
 										<p><a href="{{ post.get_absolute_url }}" class="btn btn-primary" role="button">View</a></p>

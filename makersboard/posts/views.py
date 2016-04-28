@@ -4,8 +4,6 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from urllib.parse import quote_plus
 
-from django.db.models import Q
-
 from .forms import PostForm
 from .models import Post
 
@@ -77,28 +75,8 @@ def post_delete(request, slug=None):  # CRUD: Delete
 
 
 def search(request):
-    queries = request.GET['q'].split()
-    queryset_list = Post.objects.all()  # .order_by('-timestamp')
-    for query in queries:
-        queryset_list = queryset_list.filter(
-            Q(title__icontains=query) |
-            Q(description__icontains=query) |
-            Q(user__username__icontains=query) |
-            Q(user__full_name__icontains=query)
-        )
-    paginator = Paginator(queryset_list, 10)  # Show 10 contacts per page
-    page = request.GET.get('page')
-    try:
-        queryset = paginator.page(page)
-    except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-        queryset = paginator.page(1)
-    except EmptyPage:
-        # If page is out of range (e.g. 9999), deliver last page of results.
-        queryset = paginator.page(paginator.num_pages)
+    query = request.GET['q']
     context = {
-        'object_list': queryset,
-        'title': 'Search Results',
         'query': query,
     }
     return render(request, 'search_results.html', context)
