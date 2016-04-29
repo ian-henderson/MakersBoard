@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<div class='col-sm-6 col-sm-offset-3'>
+		<div class="panel panel-default">
+				<div class="panel-heading">
+						<h1>{{ title }} Deletion Warning</h1>
+				</div>
+				<div class="panel-body">
+						<p>Are you sure you want to delete the post "{{ title }}"? </br>
+						If you do, it will be permanently erased from the database.</p>
+						<a href="{{ instance.get_absolute_url }}delete/"><input class='btn btn-default' value='Delete' /></a>
+						<a href="{{ instance.get_absolute_url }}"><input class='btn btn-default' value='Cancel' /></a>
+				</div>
+		</div>
+</div>
+
+{% endblock content %}
+

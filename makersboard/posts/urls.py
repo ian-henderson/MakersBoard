@@ -5,6 +5,7 @@ from .views import (
     post_create,
     post_detail,
     post_update,
+    post_warning,
     post_delete,
     search,
 )
@@ -16,5 +17,6 @@ urlpatterns = [
     url(r'^search_results/$', search, name='search'),
     url(r'^(?P<slug>[\w-]+)/$', post_detail, name='detail'),
     url(r'^(?P<slug>[\w-]+)/edit/$', post_update, name='update'),
+    url(r'^(?P<slug>[\w-]+)/warning/$', post_warning, name='warning'),
     url(r'^(?P<slug>[\w-]+)/delete/$', post_delete, name='delete'),
 ]

@@ -3,8 +3,8 @@ U	MigrationqaUmanage]U
 posts.apps]qUPostsConfigqaU(posts.migrations.0002_auto_20160413_2124]qhaUusers.views]q(Uuser_updateqUuser_detailqUuser_logoutqU
 user_loginqUuser_createqUuser_deleteqU	user_listqeUposts.forms]qUPostFormqaUmakersboard]Uposts.admin]qU	PostAdminqaUposts.tests]Uusers.forms]q(UUserUpdateFormqUUserFormqeUusers.admin]qUUserProfileAdminqaU(posts.migrations.0005_auto_20160415_2104]q haUusers.migrations.0001_initial]q!h	aUusers.models]q"(hhhUUserProfileq#eUmakersboard.wsgi]q$Uapplicationq%aU
 users.urls]q&Uurlpatternsq'aU
-posts.urls]q(h'aUusers]Umakersboard.urls]q)h'aU(posts.migrations.0004_auto_20160415_2033]q*haUposts.templatetags]Uposts.migrations.0001_initial]q+h	aU
-users.apps]q,UUsersConfigq-aUmakersboard.settings]q.(U	DATABASESq/UMIDDLEWARE_CLASSESq0UROOT_URLCONFq1ULANGUAGE_CODEq2UUSE_I18Nq3UAUTH_USER_MODELq4U
-SECRET_KEYq5UBASE_DIRq6U	TEMPLATESq7USTATIC_ROOTq8U	TIME_ZONEq9USESSION_ENGINEq:UWSGI_APPLICATIONq;UALLOWED_HOSTSq<UAUTH_PASSWORD_VALIDATORSq=U
-STATIC_URLq>UUSE_L10Nq?UDEBUGq@UUSE_TZqAUINSTALLED_APPSqBUPASSWORD_HASHERSqCU
-MEDIA_ROOTqDUSTATICFILES_DIRSqEUSESSION_COOKIE_HTTPONLYqFUCACHESqGU	MEDIA_URLqHeUposts.templatetags.urlify]qI(UregisterqJUurlifyqKeUposts.migrations]Uposts]Uposts.views]qL(UsearchqMUpost_detailqNU	post_listqOUpost_updateqPUpost_createqQUpost_deleteqReUusers.migrations]u.
+posts.urls]q(Uurlpatternsq)aUusers]Umakersboard.urls]q*h'aU(posts.migrations.0004_auto_20160415_2033]q+haUposts.templatetags]Uposts.migrations.0001_initial]q,h	aU
+users.apps]q-UUsersConfigq.aUmakersboard.settings]q/(U	DATABASESq0UMIDDLEWARE_CLASSESq1UROOT_URLCONFq2ULANGUAGE_CODEq3UUSE_I18Nq4UAUTH_USER_MODELq5U
+SECRET_KEYq6UBASE_DIRq7U	TEMPLATESq8USTATIC_ROOTq9U	TIME_ZONEq:USESSION_ENGINEq;UWSGI_APPLICATIONq<UALLOWED_HOSTSq=UAUTH_PASSWORD_VALIDATORSq>U
+STATIC_URLq?UUSE_L10Nq@UDEBUGqAUUSE_TZqBUINSTALLED_APPSqCUPASSWORD_HASHERSqDU
+MEDIA_ROOTqEUSTATICFILES_DIRSqFUSESSION_COOKIE_HTTPONLYqGUCACHESqHU	MEDIA_URLqIeUposts.templatetags.urlify]qJ(UregisterqKUurlifyqLeUposts.migrations]Uposts]Uposts.views]qM(UsearchqNUpost_detailqOU	post_listqPUpost_updateqQUpost_createqRUpost_warningqSUpost_deleteqTeUusers.migrations]u.

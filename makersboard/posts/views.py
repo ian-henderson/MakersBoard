@@ -116,3 +116,12 @@ def search(request):
 
     }
     return render(request, 'search_results.html', context)
+
+
+def post_warning(request, slug=None):
+    instance = get_object_or_404(Post, slug=slug)
+    context = {
+        'title': instance.title,
+        'instance': instance,
+    }
+    return render(request, 'post_warning.html', context)
