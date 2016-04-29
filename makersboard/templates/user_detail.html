@@ -16,6 +16,7 @@
 						<p>Joined {{ instance.date_joined|timesince }} ago</small></p>
 						<p>{{ instance.get_full_name }}</p>
 						<p>{{ instance.phone_number }}</p>
+						<p>{{ instance.location }}</p>
 						<p><b>Biography: </b></br>{{ instance.bio | linebreaks }}</p>
 						<a href="/users/{{ instance.username }}/edit/" class="btn btn-primary" role="button">Edit Profile</a></br>
 				</div>
