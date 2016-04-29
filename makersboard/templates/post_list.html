@@ -14,7 +14,7 @@
 				<div class="col-sm-12">
 						<div class="thumbnail">
 								{% if obj.image %}
-										<img src='{{ obj.image.url }}' class='img-responsive'/>
+								<img src='{{ obj.image.url }}' class='img-responsive'/>
 								{% endif %}
 								<!--<img src="..." alt="...">-->
 								<div class="caption">
@@ -32,18 +32,20 @@
 		</div>
 		{% endfor %}
 
-		<div class="pagination">
-				<span class="step-links">
-				    {% if object_list.has_previous %}
+		<div class='panel-footer'>
+				<div class="pagination">
+						<span class="step-links">
+								{% if object_list.has_previous %}
 								<a href="?page={{ object_list.previous_page_number  }}">previous</a>
-	 		      {% endif %}
-						<span class="current">
-								Page {{ object_list.number  }} of {{ object_list.paginator.num_pages  }}.
-						</span>
-						{% if object_list.has_next %}
+								{% endif %}
+								<span class="current">
+										Page {{ object_list.number  }} of {{ object_list.paginator.num_pages  }}.
+								</span>
+								{% if object_list.has_next %}
 								<a href="?page={{ object_list.next_page_number  }}">next</a>
-						{% endif %}
-		    </span>
+								{% endif %}
+						</span>
+				</div>
 		</div>
 </div>
 
