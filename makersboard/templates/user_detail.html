@@ -29,13 +29,17 @@
 						<h2> Gallery </h2>
 				</div>
 				<div class="panel-body">
-						{% for post in gallery %}
-								<div class='col-sm-3 col-sm-offset-0'>
-										<img src='{{ post.image.url }}' class='img-responsive thumbnail'/>
-										<a href="{{ post.get_absolute_url }}"><h3>{{ post.title }}</a></h3>
-										<p>${{ post.price }}</p>
-								</div>
-						{% endfor %}
+						{% if gallery %}
+								{% for post in gallery %}
+										<div class='col-sm-3 col-sm-offset-0'>
+												<img src='{{ post.image.url }}' class='img-responsive thumbnail'/>
+												<a href="{{ post.get_absolute_url }}"><h3>{{ post.title }}</a></h3>
+												<p>${{ post.price }}</p>
+										</div>
+								{% endfor %}
+						{% else %}
+								There are no posts to display! To post your artwork, go to the "Create Post" button in the top right corner.
+						{% endif %}
 				</div>
 		</div>
 </div>
