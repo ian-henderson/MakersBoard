@@ -8,26 +8,34 @@
 
 
 {% block content %}
+<div class='col-sm-8 col-sm-offset-2'>
+		<div class="panel panel-default">
+				<div class="panel-heading">
+						<h1>{{ title }}<small></h1>
+				</div>
+				<div class="panel-body">
 
-<div class='col-sm-6 col-sm-offset-3'>
-		{% if instance.image %}
-				<img src='{{ instance.image.url }}' class='img-responsive'/>
-		{% endif %}
-		<h1>{{ title }}<small> {{ instance.timestamp|timesince }} ago</small></h1>
-		{% if instance.user.get_full_name %}
-				{{ instance.user.get_full_name }}
-		{% endif %}
-		<p><div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="button" data-action="like" data-show-faces="true" data-share="true"></div></p>
-		{{ instance.description|linebreaks }}</br>
-		{{ instance.medium }}</br>
-		{{ instance.rating }}</br>
-		{{ instance.price }}</br>
-		{{ instance.timestamp }}</br>
-		{{ instance.updated }}</br>
-		{{ instance.id }}</br>
-
-		<p><div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="5"></div></p>
-
+						<!--<div class='col-sm-6 col-sm-offset-3'>-->
+								{% if instance.image %}
+										<img src='{{ instance.image.url }}' class='img-responsive'/>
+								{% endif %}
+								<p>added {{ instance.timestamp|timesince }} ago</p>
+								{% if instance.user.get_full_name %}
+										{{ instance.user.get_full_name }}
+								{% endif %}
+								<p><div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="button" data-action="like" data-show-faces="true" data-share="true"></div></p>
+								{{ instance.description|linebreaks }}</br>
+								{{ instance.medium }}</br>
+								{{ instance.rating }}</br>
+								${{ instance.price }}</br>
+								Created {{ instance.timestamp }}</br>
+								Updated {{ instance.updated }}</br>
+								{{ instance.id }}</br>
+								<div class='col-sm-6 col-sm-offset-1'>
+										<p><div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="5"></div></p>
+								</div>
+								<!--</div>-->
+				</div>
+		</div>
 </div>
-
 {% endblock content %}
