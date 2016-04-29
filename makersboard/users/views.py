@@ -44,7 +44,7 @@ def user_logout(request):
 
 def user_create(request):  # CRUD: Create
     if request.method == 'POST':
-        form = UserForm(request.POST, request.FILES)
+        form = UserForm(request.POST or None, request.FILES or None)
         if form.is_valid:
             # Create user
             user = UserProfile.objects.create_user(
@@ -77,27 +77,40 @@ def user_create(request):  # CRUD: Create
 
 
 def user_update(request, slug=None):  # CRUD: Update
-    if request.method == 'POST':
-        user = get_object_or_404(UserProfile, slug=slug)
-        form = UserUpdateForm(request.POST or None, request.FILES or None,
-                              instance=user)
-        if form.is_valid:
-            user.profile_picture = request.FILES['profile_picture']
-            user.first_name = request.POST['first_name']
-            user.last_name = request.POST['last_name']
-            user.bio = request.POST['bio']
-            user.location = request.POST['location']
-            user.email = request.POST['email']
-            user.phone_number = request.POST['phone_number']
-            user.save()
-            messages.success(request, 'User %s updated.' % (user.username))
-            return HttpResponseRedirect(user.get_absolute_url())
+    if request.user.is_authenticated():
+        if request.user.username == slug:
+            if request.method == 'POST':
+                user = get_object_or_404(UserProfile, slug=slug)
+                form = UserUpdateForm(request.POST or None,
+                                      request.FILES or None,
+                                      instance=user)
+                if form.is_valid:
+                    instance = form.save(commit=False)
+                    instance.save()
+                    '''
+                    user.profile_picture = request.FILES['profile_picture']
+                    user.first_name = request.POST['first_name']
+                    user.last_name = request.POST['last_name']
+                    user.bio = request.POST['bio']
+                    user.location = request.POST['location']
+                    user.email = request.POST['email']
+                    user.phone_number = request.POST['phone_number']
+                    user.save()
+                    '''
+                    messages.success(
+                        request, 'User %s updated.' % (user.username))
+                    return HttpResponseRedirect(user.get_absolute_url())
+            else:
+                form = UserUpdateForm()
+            context = {
+                'form': form,
+            }
+            return render(request, 'user_update_form.html', context)
+        else:
+            messages.warning(request,
+                             'You cannot edit another user\'s account.')
     else:
-        form = UserUpdateForm()
-    context = {
-        'form': form,
-    }
-    return render(request, 'user_update_form.html', context)
+        messages.warning(request, 'You need to be signed in to edit a user.')
 
 
 def user_list(request):  # CRUD: Retrieve
@@ -122,18 +135,31 @@ def user_list(request):  # CRUD: Retrieve
 
 
 def user_detail(request, slug=None):  # CRUD: Retrieve
+    if request.user.is_authenticated():
+        is_authenticated = True
+    else:
+        is_authenticated = False
     instance = get_object_or_404(UserProfile, slug=slug)
     gallery = Post.objects.filter(user=instance)
     context = {
         'gallery': gallery,
         'instance': instance,
+        'is_authenticated': is_authenticated,
     }
     return render(request, 'user_detail.html', context)
 
 
 def user_delete(request, slug=None):  # CRUD: Delete
-    instance = get_object_or_404(UserProfile, slug=slug)
-    username = instance.username
-    instance.delete()
-    messages.success(request, 'Successfully deleted user %s.' % (username))
-    return redirect('users:list')
+    if request.user.is_authenticated():
+        instance = get_object_or_404(UserProfile, slug=slug)
+        if request.user == slug:
+            username = instance.username
+            instance.delete()
+            messages.success(request,
+                             'Successfully deleted user %s.' % (username))
+            return redirect('users:list')
+        else:
+            messages.warning(request, 'You cannot delete another user\'s \
+                             account.')
+    else:
+        messages.warning(request, 'You need to be logged in.')
