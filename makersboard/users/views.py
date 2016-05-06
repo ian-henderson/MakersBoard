@@ -150,7 +150,7 @@ def user_detail(request, slug=None):  # CRUD: Retrieve
 
 
 def user_delete(request, slug=None):  # CRUD: Delete
-    if request.user.is_authenticated():
+    if request.user.username == slug:
         instance = get_object_or_404(UserProfile, slug=slug)
         if request.user == slug:
             username = instance.username
@@ -161,5 +161,7 @@ def user_delete(request, slug=None):  # CRUD: Delete
         else:
             messages.warning(request, 'You cannot delete another user\'s \
                              account.')
+            return redirect('/users/%s' % (slug))
     else:
         messages.warning(request, 'You need to be logged in.')
+        return redirect('/users/%s' % (slug))

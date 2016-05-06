@@ -2,7 +2,6 @@ from django.contrib.auth.models import AbstractUser
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import pre_save
-# from django.utils.text import slugify
 from phonenumber_field.modelfields import PhoneNumberField
 
 

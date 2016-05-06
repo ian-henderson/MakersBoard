@@ -5,7 +5,6 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from urllib.parse import quote_plus
 
-
 from .forms import PostForm
 from .models import Post
 
@@ -27,18 +26,45 @@ def post_create(request):  # CRUD: Create
         messages.warning(request, 'You need to be logged in.')
 
 
-def post_detail(request, slug=None):  # CRUD: Retrieve
-    if request.user.is_authenticated():
-        is_authenticated = True
-    else:
-        is_authenticated = False
+def post_update(request, slug=None):  # CRUD: Update
     instance = get_object_or_404(Post, slug=slug)
+    if request.user.is_authenticated():
+        is_owner = Post.objects.filter(slug=slug).\
+            filter(user=request.user)
+        if is_owner:
+            form = PostForm(request.POST or None,
+                            request.FILES or None,
+                            instance=instance)
+            if form.is_valid():
+                instance = form.save(commit=False)
+                instance.save()
+                messages.success(request, 'Post updated.')
+                return HttpResponseRedirect(instance.get_absolute_url())
+            context = {
+                'form': form,
+            }
+            return render(request, 'post_form.html', context)
+        else:
+            messages.warning(request, 'You cannot edit another user.')
+            return HttpResponseRedirect(instance.get_absolute_url())
+    else:
+        messages.warning(request, 'You need to be logged in to edit.')
+        return HttpResponseRedirect(instance.get_absolute_url())
+
+
+def post_detail(request, slug=None):  # CRUD: Retrieve
+    instance = get_object_or_404(Post, slug=slug)
+    if request.user.is_authenticated():
+        is_owner = Post.objects.filter(slug=slug).\
+            filter(user=request.user)
+    else:
+        is_owner = False
     share_string = quote_plus(instance.description)
     context = {
         'title': instance.title,
         'instance': instance,
         'share_string': share_string,
-        'is_authenticated': is_authenticated,
+        'is_owner': is_owner,
     }
     return render(request, 'post_detail.html', context)
 
@@ -62,33 +88,21 @@ def post_list(request):  # CRUD: Retrieve
     return render(request, 'post_list.html', context)
 
 
-def post_update(request, slug=None):  # CRUD: Update
-    if request.user.is_authenticated():
-        instance = get_object_or_404(Post, slug=slug)
-        if request.user == instance.user:
-            form = PostForm(request.POST or None,
-                            request.FILES or None,
-                            instance=instance)
-            if form.is_valid():
-                instance = form.save(commit=False)
-                instance.save()
-                messages.success(request, 'Post updated.')
-                return HttpResponseRedirect(instance.get_absolute_url())
-            context = {
-                'form': form,
-            }
-            return render(request, 'post_form.html', context)
-        else:
-            messages.warning(request, 'You cannot edit another user.')
-    else:
-        messages.warning(request, 'You need to be logged in to edit.')
-
-
 def post_delete(request, slug=None):  # CRUD: Delete
     instance = get_object_or_404(Post, slug=slug)
-    instance.delete()
-    messages.success(request, 'Successfully deleted post.')
-    return redirect('posts:list')
+    if request.user.is_authenticated():
+        is_owner = Post.objects.filter(slug=slug).\
+            filter(user=request.user)
+        if is_owner:
+            instance.delete()
+            messages.success(request, 'Successfully deleted post.')
+            return redirect('posts:list')
+        else:
+            messages.error(request, 'You cannot delete a post you don\'t own.')
+            return HttpResponseRedirect(instance.get_absolute_url())
+    else:
+        messages.error(request, 'You have to be logged in to delete a post.')
+        return HttpResponseRedirect(instance.get_absolute_url())
 
 
 def search(request):
