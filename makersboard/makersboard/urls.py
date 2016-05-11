@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^posts/', include('posts.urls', namespace='posts')),
     url(r'^users/', include('users.urls', namespace='users')),
+    url(r'^messages/', include('postman.urls', namespace='postman')),
 ]
 
 if settings.DEBUG:

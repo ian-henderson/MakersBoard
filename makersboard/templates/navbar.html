@@ -25,16 +25,17 @@
 						<ul class="nav navbar-nav navbar-right">
 								{% if user.is_authenticated %}
 								<div class="btn-group" role="group" aria-label="...">
-										<a href='/users/{{ user.username }}' class='btn navbar-btn' role='button'>{{ user.first_name }}</a>
-										<a href='/users/logout' class='btn navbar-btn' role='button'><span class="glyphicon glyphicon-log-out"></span> Log Out</a>
+										<a href='/users/{{ user.username }}' class='btn navbar-btn' role='button'><span class="glyphicon glyphicon-user"></span> {{ user.first_name }} </a>
+                                        <a href='/messages/' class='btn navbar-btn' role='button'><span class="glyphicon glyphicon-envelope"></span> Messages </a>
+										<a href='/users/logout' class='btn navbar-btn' role='button'><span class="glyphicon glyphicon-log-out"></span> Log Out </a>
 								</div>
 								<div class="btn-group" role="group" aria-label="...">
-										<a href='/posts/create' class='btn navbar-btn' role='button'><span class='glyphicon glyphicon-pencil'></span> Create Post</a>
+										<a href='/posts/create' class='btn navbar-btn' role='button'><span class='glyphicon glyphicon-pencil'></span> Create Post </a>
 								</div>
 								{% else %}
 								<div class="btn-group" role="group" aria-label="...">
-										<a href='/users/create' class='btn navbar-btn' role='button'><span class="glyphicon glyphicon-user"></span></span> Sign Up</a>
-										<a href='/users/login' class='btn navbar-btn' role='button'><span class="glyphicon glyphicon-log-in"></span> Log In</a>
+										<a href='/users/create' class='btn navbar-btn' role='button'><span class="glyphicon glyphicon-user"></span> Sign Up </a>
+										<a href='/users/login' class='btn navbar-btn' role='button'><span class="glyphicon glyphicon-log-in"></span> Log In </a>
 								</div>
 								{% endif %}
 						</ul>
