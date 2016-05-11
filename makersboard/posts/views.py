@@ -57,6 +57,7 @@ def post_detail(request, slug=None):  # CRUD: Retrieve
     if request.user.is_authenticated():
         is_owner = Post.objects.filter(slug=slug).\
             filter(user=request.user)
+        owner = request.user
     else:
         is_owner = False
     share_string = quote_plus(instance.description)
@@ -65,6 +66,8 @@ def post_detail(request, slug=None):  # CRUD: Retrieve
         'instance': instance,
         'share_string': share_string,
         'is_owner': is_owner,
+        'owner': owner,
+        'is_authenticated': request.user.is_authenticated(),
     }
     return render(request, 'post_detail.html', context)
 
