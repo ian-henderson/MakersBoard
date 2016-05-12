@@ -1,12 +1,8 @@
 {% extends "postman/base_folder.html" %}
 {% load i18n %}
-<<<<<<< HEAD
 
 
-{% block pm_folder_title %}{% trans "Received Messages" %}{% endblock %}
-=======
-{% block pm_folder_title %}{% trans "Received Messages" %}<p style="padding-top:1cm"><a href="{% url 'postman:write' %}" class="btn btn-primary" role="button">Send Message</a></p>{% endblock %}
->>>>>>> 4e16f1d30fff949a7e9df93c5accd1f0a78a45bd
+{% block pm_folder_title %}{% trans "Received Messages" %}<p style="padding-top:1cm"><a href="{% url 'postman:write' %}" class="btn btn-primary" role="button">Send Message</a></p></br>{% endblock %}
 {% block pm_undelete_button %}{% endblock %}
 {% block pm_recipient_header %}{% endblock %}
 {% block pm_date %}{% trans "Received" %}{% endblock %}

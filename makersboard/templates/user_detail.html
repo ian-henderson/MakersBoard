@@ -2,51 +2,54 @@
 
 
 {% block head_title %}
-		{{ instance.username}} | {{ block.super }}
+{{ instance.username}} | {{ block.super }}
 {% endblock head_title %}
 
 
 {% block content %}
 
 <div class='col-sm-4 col-sm-offset-0'>
-		<div class="panel panel-default">
-				<div class="panel-body">
-						<img src='{{ instance.profile_picture.url }}' class='img-responsive'/>
-						<h1><b>{{ instance.username }}</b><small></h1>
-								<p><b>Joined</b> {{ instance.date_joined|timesince }} ago</small></p>
-						<p><b>Full Name:</b> {{ instance.get_full_name }}</p>
-						<p><b>Phone Number:</b> {{ instance.phone_number }}</p>
-						<p><b>Location:</b> {{ instance.location }}</p>
-						<p><b>Biography: </b>{{ instance.bio }}</p></br>
-						{% if is_user %}
-						<a href="/users/{{ instance.username }}/edit/" class="btn btn-primary" role="button">Edit Profile</a>
-						<a href="/users/{{ instance.username }}/delete/" class="btn btn-danger" role="button">Delete Profile</a></br>
-                        {% elif is_authenticated %}
-                        <a href="{% url 'postman:write' instance.username %}" class="btn btn-primary" role="button">Message {{ instance.username }}</a></br>
-						{% endif %}
-				</div>
-		</div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <img src='{{ instance.profile_picture.url }}' class='img-responsive'/>
+            <h1>{{ instance.username }}</h1>
+            <b>Joined</b> {{ instance.date_joined|timesince }} ago</br>
+            <b>Full Name</b> {{ instance.get_full_name }}</br>
+            <b>Phone Number</b> {{ instance.phone_number }}</br>
+            <b>Location</b> {{ instance.location }}</br>
+            <b>Biography </b>{{ instance.bio }}</br></br>
+            {% if is_user %}
+            <a href="/users/{{ instance.username }}/edit/" class="btn btn-primary" role="button">Edit Profile</a>
+            <a href="/users/{{ instance.username }}/delete/" class="btn btn-danger" role="button">Delete Profile</a></br>
+            {% elif is_authenticated %}
+            <a href="{% url 'postman:write' instance.username %}" class="btn btn-primary" role="button">Message {{ instance.username }}</a></br>
+            {% endif %}
+        </div>
+    </div>
 </div>
 
 <div class='col-sm-8 col-sm-offset-0'>
-		<div class="panel panel-default">
-				<div class="panel-heading">
-						<h2> Gallery </h2>
-				</div>
-				<div class="panel-body">
-						{% if gallery %}
-								{% for post in gallery %}
-										<div class='col-sm-3 col-sm-offset-0'>
-												<img src='{{ post.image.url }}' class='img-responsive thumbnail'/>
-												<a href="{{ post.get_absolute_url }}"><h3>{{ post.title }}</a></h3>
-												<p>${{ post.price }}</p>
-										</div>
-								{% endfor %}
-						{% else %}
-								There are no posts to display! To post your artwork, go to the "Create Post" button in the top right corner.
-						{% endif %}
-				</div>
-		</div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h1>Gallery</h1>
+        </div>
+        <div class="panel-body">
+            {% if gallery %}
+            {% for post in gallery %}
+            <div class='col-sm-3 col-sm-offset-0'>
+                <img src='{{ post.image.url }}' class='img-responsive thumbnail'/>
+                <a href="{{ post.get_absolute_url }}"><h3>{{ post.title }}</h3></a>
+                <b>Author</b> {{ post.user.get_full_name }}</br>
+                <b>Price</b> ${{ post.price }}</br>
+                <b>Medium</b> {{ post.medium }}</br>
+                <b>Created</b> {{ post.timestamp|date }}</br>
+            </div>
+            {% endfor %}
+            {% else %}
+            There are no posts to display! To post your artwork, go to the "Create Post" button in the top right corner.
+            {% endif %}
+        </div>
+    </div>
 </div>
 
 {% endblock content %}
