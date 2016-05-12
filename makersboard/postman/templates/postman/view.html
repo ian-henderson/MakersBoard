@@ -12,7 +12,7 @@
             <span class="pm_subject"><b>Subject</b> {{ message.subject }}</br></span>
             {% if message.is_rejected %}  <div class="pm_status">{% trans "Rejected" %}{% if message.moderation_reason %}{% trans ":" %} {{ message.moderation_reason }}{% endif %}</div>{% endif %}
         </div>
-        <div class="pm_body"><b>Message</b> {{ message.body|linebreaksbr }}</div>
+        </br><div class="pm_body">{{ message.body|linebreaksbr }}</div></br>
     </div>
     {% if forloop.last %}
     <form action="" method="post">{% csrf_token %}
@@ -20,9 +20,9 @@
         <a href="{{ next_url }}">{% trans "Back" %}</a>
         <span id="pm_buttons">
             <button type="submit" onclick="this.form.action='{% url 'postman:delete' %}?next={{ next_url|urlencode }}'">{% trans "Delete" %}</button>
-            {% if not archived %}<button type="submit" onclick="this.form.action='{% url 'postman:archive' %}?next={{ next_url|urlencode }}'">{% trans "Archive" %}</button>{% endif %}
+            <!--{% if not archived %}<button type="submit" onclick="this.form.action='{% url 'postman:archive' %}?next={{ next_url|urlencode }}'">{% trans "Archive" %}</button>{% endif %}-->
         </span>
-        {% if reply_to_pk %}<a href="{% url 'postman:reply' reply_to_pk %}?next={{ next_url|urlencode }}">{% trans "Reply" %}</a>{% endif %}
+        <!--{% if reply_to_pk %}<a href="{% url 'postman:reply' reply_to_pk %}?next={{ next_url|urlencode }}">{% trans "Reply" %}</a>{% endif %}-->
     </form>
     {% if reply_to_pk %}<hr />
     <h2>{% trans 'Reply' %}</h2>

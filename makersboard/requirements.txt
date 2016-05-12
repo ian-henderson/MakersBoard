@@ -6,5 +6,6 @@ django-phonenumber-field==1.1.0
 mock==2.0.0
 pbr==1.9.1
 phonenumberslite==7.3.0
+picklable-itertools==0.1.1
 pytz==2016.3
 six==1.10.0
