@@ -135,16 +135,20 @@ def user_list(request):  # CRUD: Retrieve
 
 
 def user_detail(request, slug=None):  # CRUD: Retrieve
-    if request.user.is_authenticated():
-        is_authenticated = True
-    else:
-        is_authenticated = False
     instance = get_object_or_404(UserProfile, slug=slug)
+    if request.user.is_authenticated():
+        if request.user == instance:
+            is_user = True
+        else:
+            is_user = False
+    else:
+        is_user = False
     gallery = Post.objects.filter(user=instance)
     context = {
         'gallery': gallery,
         'instance': instance,
-        'is_authenticated': is_authenticated,
+        'is_authenticated': request.user.is_authenticated(),
+        'is_user': is_user,
     }
     return render(request, 'user_detail.html', context)
 

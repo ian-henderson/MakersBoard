@@ -18,9 +18,11 @@
 						<p><b>Phone Number:</b> {{ instance.phone_number }}</p>
 						<p><b>Location:</b> {{ instance.location }}</p>
 						<p><b>Biography: </b>{{ instance.bio }}</p></br>
-						{% if is_authenticated %}
+						{% if is_user %}
 						<a href="/users/{{ instance.username }}/edit/" class="btn btn-primary" role="button">Edit Profile</a>
 						<a href="/users/{{ instance.username }}/delete/" class="btn btn-danger" role="button">Delete Profile</a></br>
+                        {% elif is_authenticated %}
+                        <a href="{% url 'postman:write' instance.username %}" class="btn btn-primary" role="button">Message {{ instance.username }}</a></br>
 						{% endif %}
 				</div>
 		</div>
